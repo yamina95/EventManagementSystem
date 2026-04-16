@@ -1,30 +1,43 @@
 package models;
 
-public class Student {
-    private int id;
-    private String name;
-    private String email;
+import interfaces.Registerable;
 
-    public Student(int id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+public class Student extends Person implements Registerable {
+    private String studentId;
+    private String major;
+
+    public Student(String id, String name, String email, String studentId, String major) {
+        super(id, name, email);
+        this.studentId = studentId;
+        this.major = major;
     }
 
-    public int getId() {
-        return id;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public String getName() {
-        return name;
+    public String getMajor() {
+        return major;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public void register() {
+        System.out.println(name + " performed a register action.");
+    }
+
+    @Override
+    public void unregister() {
+        System.out.println(name + " performed an unregister action.");
+    }
+
+    @Override
+    public String getDetails() {
+        return "Student{id='" + id + "', name='" + name + "', email='" + email
+                + "', studentId='" + studentId + "', major='" + major + "'}";
     }
 
     @Override
     public String toString() {
-        return "Student{id=" + id + ", name='" + name + "', email='" + email + "'}";
+        return name + " (" + studentId + ")";
     }
 }

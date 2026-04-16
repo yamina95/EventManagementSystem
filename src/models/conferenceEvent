@@ -1,0 +1,29 @@
+package models;
+
+import exceptions.InvalidDateException;
+
+public class ConferenceEvent extends Event {
+    private String keynoteSpeaker;
+
+    public ConferenceEvent(int id, String title, String date, String location,
+                           int maxCapacity, Room room, String keynoteSpeaker)
+            throws InvalidDateException {
+        super(id, title, date, location, maxCapacity, room);
+        this.keynoteSpeaker = keynoteSpeaker;
+    }
+
+    public String getSpeakerInfo() {
+        return keynoteSpeaker;
+    }
+
+    public void scheduleKeynote() {
+        System.out.println("Keynote by " + keynoteSpeaker + " has been scheduled.");
+    }
+
+    @Override
+    public String getDetails() {
+        return "ConferenceEvent{id=" + id + ", title='" + title + "', date='" + date
+                + "', location='" + location + "', maxCapacity=" + maxCapacity
+                + ", room=" + room + ", keynoteSpeaker='" + keynoteSpeaker + "'}";
+    }
+}

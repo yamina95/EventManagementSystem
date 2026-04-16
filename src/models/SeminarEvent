@@ -1,0 +1,32 @@
+package models;
+
+import exceptions.InvalidDateException;
+
+public class SeminarEvent extends Event {
+    private String topic;
+
+    public SeminarEvent(int id, String title, String date, String location,
+                        int maxCapacity, Room room, String topic)
+            throws InvalidDateException {
+        super(id, title, date, location, maxCapacity, room);
+        this.topic = topic;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        if (topic == null || topic.trim().isEmpty()) {
+            throw new IllegalArgumentException("Topic cannot be empty.");
+        }
+        this.topic = topic;
+    }
+
+    @Override
+    public String getDetails() {
+        return "SeminarEvent{id=" + id + ", title='" + title + "', date='" + date
+                + "', location='" + location + "', maxCapacity=" + maxCapacity
+                + ", room=" + room + ", topic='" + topic + "'}";
+    }
+}
