@@ -9,6 +9,11 @@ public class SeminarEvent extends Event {
                         int maxCapacity, Room room, String topic)
             throws InvalidDateException {
         super(id, title, date, location, maxCapacity, room);
+
+        if (topic == null || topic.trim().isEmpty()) {
+            throw new IllegalArgumentException("Topic cannot be empty.");
+        }
+
         this.topic = topic;
     }
 

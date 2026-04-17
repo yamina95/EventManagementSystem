@@ -9,6 +9,11 @@ public class ConferenceEvent extends Event {
                            int maxCapacity, Room room, String keynoteSpeaker)
             throws InvalidDateException {
         super(id, title, date, location, maxCapacity, room);
+
+        if (keynoteSpeaker == null || keynoteSpeaker.trim().isEmpty()) {
+            throw new IllegalArgumentException("Keynote speaker cannot be empty.");
+        }
+
         this.keynoteSpeaker = keynoteSpeaker;
     }
 

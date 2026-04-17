@@ -8,6 +8,14 @@ public class Student extends Person implements Registerable {
 
     public Student(String id, String name, String email, String studentId, String major) {
         super(id, name, email);
+
+        if (studentId == null || studentId.trim().isEmpty()) {
+            throw new IllegalArgumentException("Student ID cannot be empty.");
+        }
+        if (major == null || major.trim().isEmpty()) {
+            throw new IllegalArgumentException("Major cannot be empty.");
+        }
+
         this.studentId = studentId;
         this.major = major;
     }

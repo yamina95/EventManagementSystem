@@ -9,6 +9,13 @@ public class Notification {
     private boolean isRead;
 
     public Notification(String message, String recipientId) {
+        if (message == null || message.trim().isEmpty()) {
+            throw new IllegalArgumentException("Notification message cannot be empty.");
+        }
+        if (recipientId == null || recipientId.trim().isEmpty()) {
+            throw new IllegalArgumentException("Recipient ID cannot be empty.");
+        }
+
         this.message = message;
         this.recipientId = recipientId;
         this.timestamp = LocalDateTime.now();
@@ -36,7 +43,7 @@ public class Notification {
     }
 
     public void showNotification() {
-        System.out.println(toString());
+        System.out.println(this);
     }
 
     @Override

@@ -4,7 +4,13 @@ import exceptions.AlreadyRegisteredException;
 import exceptions.EventFullException;
 import exceptions.InvalidDateException;
 import exceptions.RoomAlreadyBookedException;
-import models.*;
+import models.Admin;
+import models.ConferenceEvent;
+import models.Event;
+import models.Notification;
+import models.Room;
+import models.SeminarEvent;
+import models.Student;
 
 import java.util.List;
 

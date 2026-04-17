@@ -8,6 +8,7 @@ import exceptions.StudentNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class Event {
@@ -30,6 +31,9 @@ public abstract class Event {
         }
         if (maxCapacity < 1) {
             throw new IllegalArgumentException("Max capacity must be at least 1.");
+        }
+        if (room != null && maxCapacity > room.getCapacity()) {
+            throw new IllegalArgumentException("Event capacity cannot exceed room capacity.");
         }
 
         validateDate(date);
@@ -87,23 +91,34 @@ public abstract class Event {
     }
 
     public void setRoom(Room room) {
+        if (room != null && maxCapacity > room.getCapacity()) {
+            throw new IllegalArgumentException("Event capacity cannot exceed room capacity.");
+        }
         this.room = room;
     }
 
     public List<Student> getRegisteredStudents() {
-        return registeredStudents;
+        return Collections.unmodifiableList(registeredStudents);
     }
 
     public List<Student> getParticipants() {
-        return registeredStudents;
+        return getRegisteredStudents();
     }
 
     public boolean isFull() {
         return registeredStudents.size() >= maxCapacity;
     }
 
+    public int getRegisteredCount() {
+        return registeredStudents.size();
+    }
+
     public void registerStudent(Student student)
             throws AlreadyRegisteredException, EventFullException {
+
+        if (student == null) {
+            throw new IllegalArgumentException("Student cannot be null.");
+        }
 
         if (registeredStudents.contains(student)) {
             throw new AlreadyRegisteredException(student.getName(), title);
@@ -118,6 +133,10 @@ public abstract class Event {
 
     public void unregisterStudent(Student student)
             throws StudentNotFoundException {
+
+        if (student == null) {
+            throw new IllegalArgumentException("Student cannot be null.");
+        }
 
         if (!registeredStudents.contains(student)) {
             throw new StudentNotFoundException(student.getName(), title);
